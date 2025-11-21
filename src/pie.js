@@ -39,22 +39,22 @@ function addGraph(name, targetElemID) {
     const canvas = gInst.canvas;
 
     if (!gInst) {
-        console.error("Graph.js Error: Graph with name " + name + " not found!");
+        console.error("[Pie] Error: Graph with name " + name + " not found!");
         return null;
     }
 
     if (!canvas || !(canvas instanceof Node)) {
-        console.error("Graph.js Internal Error: Retrieved graph instance does not contain a valid Canvas Node!");
+        console.error("[Pie] Internal Error: Retrieved graph instance does not contain a valid Canvas Node!");
         return null;
     }
 
     if (!targetElem) {
-        console.error("Graph.js Error: Element with ID " + targetElemID + " not found!");
+        console.error("[Pie] Error: Element with ID " + targetElemID + " not found!");
         return null;
     }
 
     if (targetElem.contains(canvas)) {
-        console.warn("Graph.js Warning: Graph with name " + name + " already exists in container " + targetElemID);
+        console.warn("[Pie] Warning: Graph with name " + name + " already exists in container " + targetElemID);
         return canvas;
     }
 
@@ -75,7 +75,7 @@ function drawNode(nodeName, name) {
     const ctx = gInst.ctx;
 
     if (!nInst) {
-        console.error("Graph.js Error: Node with name " + nodeName + " not found!");
+        console.error("[Pie] Error: Node with name " + nodeName + " not found!");
     }
 
     ctx.beginPath();

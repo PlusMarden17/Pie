@@ -1,20 +1,20 @@
-# Pie documentation
+# Graph.js documentation
 
 ---
 
 The content of documentation:
 
-* [What is Pie](#what-is-pie)
-* [Installation](#install-library)
+* [What is Graph.js](#what-is-graphjs)
+* [Installation](#installation)
 * [Getting started](#getting-started)
     * [Graph arguments](#graph-arguments)
     * [Drawing lines](#drawing-lines)
 
 ---
 
-## What is Pie
+## What is Graph.js
 
-Pie - is the JavaScript graph library
+Graph.js - is the JavaScript graph library
 
 [Back to content ->](#graph.js-documentation)
 
@@ -22,10 +22,10 @@ Pie - is the JavaScript graph library
 
 ## Installation
 
-To install Pie you need:
-1. **Download** `pie.js` file on github
-2. **Place** it in your project (Better create /libs folder in your project and put `pie.js` file into there)
-3. **Add** script usage to your HTML file (If you placed the library file into the /libs folder, add this line to the `<head>` section of your HTML: `<script src="/libs/pie.js"></script>`)
+To install Graph.js you need:
+1. **Download** `graph.js` file on github
+2. **Place** it in your project (Better create /libs folder in your project and put `graph.js` file into there)
+3. **Add** script usage to your HTML file (If you placed the library file into the /libs folder, add this line to the `<head>` section of your HTML: `<script src="/libs/graph.js"></script>`)
 
 **Done!** Now you can use library...
 
@@ -35,7 +35,7 @@ To install Pie you need:
 
 ## Getting started
 
-To start working with Pie you need to create graphs container in your HTML file, example:
+To start working with Graph.js you need to create graphs container in your HTML file, example:
 `<div id="graphs"></div>`
 You can choose ID what ever you want.
 Now let's create a new graph and add it to graphs container, example:
@@ -53,7 +53,7 @@ When we created a new graph we entered 3 arguments "test", 100 and 200, this is 
 `100` - Graphs height <br>
 `200` - Graphs width <br>
 Then in third line we added graph to containe, this is what the arguments means:
-`"test"` - Graphs name <br>
+`"test"` - Graphs name <br> 
 `"graphs"` - Container name <br>
 You can enter different values of arguments but this is an example.
 
@@ -61,10 +61,9 @@ You can enter different values of arguments but this is an example.
 
 Now you can draw lines in your graph. Do to that you need to create a new node and then draw it, example:
 
-> const n1 = newNode("testNode", 50, 100);
-> drawNode("testNode", "test");
+> const n1 = newNode("testNode", 50, 100); <br>
+> drawNode("testNode", "test"); <br>
 
 Where "testNode" is the node name, 50 - y value and 100 - x value
-
 
 ---

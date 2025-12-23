@@ -1,86 +1,103 @@
-const graphs = {};
-const nodes = {};
+class Graph {
+    constructor(height, width) {
+        this.h = height;
+        this.w = width;
 
-class GraphInstance {
-    constructor(canvas, ctx) {
-        this.canvas = canvas;
-        this.ctx = ctx;
+        this.canvas = document.createElement("canvas");
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.canvas.classList.add("graphs");
+
+        this.ctx = this.canvas.getContext("2d");
+    }
+
+    drawGrid(step = 50) {
+        const { ctx, w, h } = this;
+        ctx.save();
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "#e0e0e0";
+
+        ctx.beginPath();
+        for (let x = 0; x <= w; x += step) {
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, h);
+        }
+        for (let y = 0; y <= h; y += step) {
+            ctx.moveTo(0, y);
+            ctx.lineTo(w, y);
+        }
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.strokeStyle = "#cccccc";
+        ctx.lineWidth = 1.5;
+        
+        ctx.moveTo(0, h / 2);
+        ctx.lineTo(w, h / 2);
+        
+        ctx.moveTo(w / 2, 0);
+        ctx.lineTo(w / 2, h);
+        
+        ctx.stroke();
+        ctx.restore();
+        return this;
+    }
+
+    add(id) {
+        const target = document.getElementById(id);
+        if (target) {
+            target.appendChild(this.canvas);
+            this.drawGrid();
+        }
+        return this;
+    }
+
+    draw(func, color = "blue") {
+        const {
+            ctx,
+            w,
+            h
+        } = this;
+
+        let formatedFunc;
+
+        if (typeof func === "string") {
+            const clean = func.replace(/\^/g, "**");
+            formatedFunc = new Function("x", `return ${clean};`);
+        } else {
+            formatedFunc = func;
+        }
+
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+
+        let begin = true;
+
+        for (let p = 0; p <= w; p++) {
+            const x = p - w / 2;
+            let y;
+
+            try {
+                y = formatedFunc(x);
+                if (y === null || isNaN(y) || !isFinite(y)) {
+                    begin = true;
+                    continue;
+                }
+                if (begin) {
+                    ctx.moveTo(p, h / 2 - y);
+                    begin = false;
+                } else {
+                    ctx.lineTo(p, h / 2 - y);
+                }
+            } catch (e) {
+                begin = true;
+                continue;
+            }
+        }
+
+        ctx.stroke();
+        ctx.restore();
+        return this;
     }
 }
-
-class NodeInstance {
-    constructor(nodeName, y , x) {
-        this.nodeName = nodeName;
-        this.y = y;
-        this.x = x;
-    }
-}
-
-function newGraph(name, height, width) {
-    const canvas = document.createElement("canvas");
-    const id = `graph-${name.toLowerCase().replace(/\s+/g, '-')}`;
-
-    canvas.id = id; 
-    canvas.height = height;
-    canvas.width = width;
-    canvas.classList.add("graph-canvas");
-
-    const ctx = canvas.getContext('2d');
-    const gInst = new GraphInstance(canvas, ctx);
-
-    graphs[name] = gInst;
-
-    return gInst;
-}
-
-function addGraph(name, targetElemID) {
-    const gInst = graphs[name];
-    const targetElem = document.getElementById(targetElemID);
-    const canvas = gInst.canvas;
-
-    if (!gInst) {
-        console.error("Graph.js Error: Graph with name " + name + " not found!");
-        return null;
-    }
-
-    if (!canvas || !(canvas instanceof Node)) {
-        console.error("Graph.js Internal Error: Retrieved graph instance does not contain a valid Canvas Node!");
-        return null;
-    }
-
-    if (!targetElem) {
-        console.error("Graph.js Error: Element with ID " + targetElemID + " not found!");
-        return null;
-    }
-
-    if (targetElem.contains(canvas)) {
-        console.warn("Graph.js Warning: Graph with name " + name + " already exists in container " + targetElemID);
-        return canvas;
-    }
-
-    targetElem.appendChild(canvas);
-    
-    return canvas;
-}
-
-function newNode(nodeName, y, x) {
-    const nInst = new NodeInstance(nodeName, y, x);
-    nodes[nodeName] = nInst;
-    return nInst;
-}
-
-function drawNode(nodeName, name) {
-    const gInst = graphs[name];
-    const nInst = nodes[nodeName];
-    const ctx = gInst.ctx;
-
-    if (!nInst) {
-        console.error("Graph.js Error: Node with name " + nodeName + " not found!");
-    }
-
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(nInst.y, nInst.x);
-    ctx.stroke();
-}
-

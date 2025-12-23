@@ -1,32 +1,30 @@
 # Graph.js
 
-Graph.js - JavaScript library for creating graphs (In development)
+Graph.js - JavaScript бібліотека для створення алгебраїчних графіків.
 
-## Usage
+## Використання
 
-Here is an example of how to use Pie:
+Ось приклад використання Graph.js:
 ```html
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="graph.js"></script> <!-- Importing library file -->
+        <script src="graph.js"></script>
     </head>
     <body>
-        <div id="graphs"> <!-- Graphs container -->
-
-        </div>
+        <div id="graphs"></div>
         <script>
-            const g1 = newGraph("test", 500, 500); // Creating a new graph
-            const ctx1 = g1.ctx; // Creating the graphs context
-            addGraph("test", "graphs"); // Adding graph to container
-            const n1 = newNode("gg", 250, 250); // Creating new line
-            drawNode("gg", "test"); // Drawing line on the screen
+            const graph = new Graph(600, 600);
+            graph.add("graphs");
+            graph.draw("6000 / x");
         </script>
     </body>
 </html>
 ```
-This code will draw a black line that starts in the top left corner of browser tab and ends in center of the graph
+Цей код створює графік graph, додає його в контейнер графіків graphs і малює функцію 6000 / x на графіку (Гіпербола). Ось як це виглядає:
 
-## Documentation
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/113f02df-7cf9-4031-90bd-4cfd55adf121" />
 
-You can read how to use Graph.js in the DOCUMENTATION.md file in the repository
+## Документація
+
+Ви можете прочитати як використовувати бібліотеку в файлі DOCUMENTATION.md в цьому GitHub репозиторії

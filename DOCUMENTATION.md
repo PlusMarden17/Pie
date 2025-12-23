@@ -2,68 +2,78 @@
 
 ---
 
-The content of documentation:
+Зміст документації:
 
-* [What is Graph.js](#what-is-graphjs)
-* [Installation](#installation)
-* [Getting started](#getting-started)
-    * [Graph arguments](#graph-arguments)
-    * [Drawing lines](#drawing-lines)
-
----
-
-## What is Graph.js
-
-Graph.js - is the JavaScript graph library
-
-[Back to content ->](#graph.js-documentation)
+* [Що таке Graph.js](#що-таке-graphjs)
+* [Завантаження](#завантаження)
+* [Почнімо](#почнімо)
+* [Малювання функцій](#малювання-функцій)
 
 ---
 
-## Installation
+## Що таке Graph.js
 
-To install Graph.js you need:
-1. **Download** `graph.js` file on github
-2. **Place** it in your project (Better create /libs folder in your project and put `graph.js` file into there)
-3. **Add** script usage to your HTML file (If you placed the library file into the /libs folder, add this line to the `<head>` section of your HTML: `<script src="/libs/graph.js"></script>`)
+Graph.js - JavaScript бібліотека для малювання алгебраїчних графіків
 
-**Done!** Now you can use library...
-
-[Back to content ->](#graph.js-documentation)
+[Назад до змісту ->](#graph.js-documentation)
 
 ---
 
-## Getting started
+## Завантаження
 
-To start working with Graph.js you need to create graphs container in your HTML file, example:
-`<div id="graphs"></div>`
-You can choose ID what ever you want.
-Now let's create a new graph and add it to graphs container, example:
+Для того щоб завантажити Graph.js вам потрібно:
+1. **Завантажити** `graph.js` файл з GitHub
+2. **Перемістити** завантажений файл в потрібну вам директорію
+3. **Додати** в `<head>` розділ вашого HTML файлу імпортування скрипту (`<script src="graph.js"></script>`)
 
-> const g1 = newGraph("test", 100, 200); <br>
-> const ctx1 = g1.ctx; <br>
-> addGraph("test", "graphs"); <br>
+**Готово!** Тепер ви можете користуватися бібліотекою...
 
-In first line we created new graph with name test and ID g1, then we created ctx and assigned that to our graph. And in last line we added graph to graphs container.
+[Назад до змісту ->](#graph.js-documentation)
 
-### Graph arguments
+---
 
-When we created a new graph we entered 3 arguments "test", 100 and 200, this is what it means:
-`"test"` - Graphs name <br>
-`100` - Graphs height <br>
-`200` - Graphs width <br>
-Then in third line we added graph to containe, this is what the arguments means:
-`"test"` - Graphs name <br> 
-`"graphs"` - Container name <br>
-You can enter different values of arguments but this is an example.
+## Почнімо
 
-### Drawing lines
+Для початку роботи з Graph.js вам потрібно створити контейнер графіків у вашому HTML файлі, наприклад:
+```html
+<div id="graphs"></div>
+```
+Ви можете вибрати id яке ви хочете.
+Тепер давайте створимо поле графіків (графік) та додамо його до контейнеру:
 
-Now you can draw lines in your graph. Do to that you need to create a new node and then draw it, example:
+```javascript
+const graph = new Graph(600, 600);
+graph.add("graphs");
+```
 
-> const n1 = newNode("testNode", 50, 100); <br>
-> drawNode("testNode", "test"); <br>
+В першій лінії ми створили об'єкт графіка з висотою 600 та шириною 600 а потім ми додали наший графік в попередньо створений контейнер графіків (Назви і розміри можуть бути будь якими).
 
-Where "testNode" is the node name, 50 - y value and 100 - x value
+[Назад до змісту ->](#graph.js-documentation)
+
+---
+
+## Малювання функцій
+
+Ми створили поле графіків а тепер давайте намалюємо класичну гіперболу на нашому графіку:
+
+```javascript
+graph.draw("600 / x");
+```
+
+Тепер на вашому графіку з'явиться красива функція! Також ми можемо намалювати параболу:
+
+```javascript
+graph.draw("x^2");
+```
+
+У Graph.js є автоматичне форматування ^ на ** для простішого написання функцій. Можливо ви помітили що всі графіки синього кольору, але ми можемо їм дати будь який колір який ми хочемо! Наприклад:
+
+```javascript
+graph.draw("x^2", "red");
+```
+
+Намалює червону параболу, другий аргумент функції draw() приймає колір, ми можемо використовувати як і "red", "green", "pink" так і HEX кольори "#403939", "#ab34eb" та інші.
+
+[Назад до змісту ->](#graph.js-documentation)
 
 ---
